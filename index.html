@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Muktai ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- AUDIO PLAYER -->
+    <audio id="bgMusic" loop>
+      <source src="/source/birthday.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- POP SOUND EFFECT -->
+    <audio id="popSound">
+      <source src="source/pop.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="yaySound">
+      <source src="source/yay.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- SVG FIREWORKS CONTAINER -->
+    <svg
+      id="fireworksContainer"
+      class="fireworks-svg"
+      viewBox="0 0 1366 768"
+      preserveAspectRatio="xMidYMid slice"
+    ></svg>
+
+    <!-- TAP SCREEN -->
+    <div id="tapScreen">
+      <!-- Background glow effects -->
+      <div class="glow-box glow1"></div>
+      <div class="glow-box glow2"></div>
+
+      <!-- Floating decorative elements -->
+      <div class="floating-element float1">🎉</div>
+      <div class="floating-element float2">💕</div>
+      <div class="floating-element float3">✨</div>
+      <div class="floating-element float4">🎈</div>
+      <div class="floating-element float5">🌸</div>
+      <div class="floating-element float6">💖</div>
+
+      <!-- Birthday confetti -->
+      <div class="birthday-confetti confetti1">🎂</div>
+      <div class="birthday-confetti confetti2">🎁</div>
+      <div class="birthday-confetti confetti3">⭐</div>
+      <div class="birthday-confetti confetti4">🎀</div>
+      <div class="birthday-confetti confetti5">💝</div>
+      <div class="birthday-confetti confetti6">🌟</div>
+
+      <!-- Additional sparkles -->
+      <div class="sparkle sparkle1">✨</div>
+      <div class="sparkle sparkle2">💫</div>
+      <div class="sparkle sparkle3">⭐</div>
+      <div class="sparkle sparkle4">✨</div>
+      <div class="sparkle sparkle5">💫</div>
+
+      <div class="tap-container">
+        <h1>Muktai</h1>
+        <img
+          id="tapImage"
+          src="source/image1.jpg"
+          alt="Birthday girl"
+          onerror="this.style.display='none'"
+        />
+        <p>Tap to begin 👆</p>
+      </div>
+    </div>
+
+    <!-- GAME -->
+    <div id="game">
+      <div id="counter">Hearts <span id="score">0</span> / 7</div>
+      <div id="heartContainer"></div>
+    </div>
+
+    <!-- FINAL -->
+    <div id="final">
+      <!-- Ambient light effects -->
+      <div class="ambient-light light-1"></div>
+      <div class="ambient-light light-2"></div>
+      <div class="ambient-light light-3"></div>
+
+      <!-- Floating celebration elements -->
+      <div class="celebration-float float-elem-1">✨</div>
+      <div class="celebration-float float-elem-2">💫</div>
+      <div class="celebration-float float-elem-3">⭐</div>
+      <div class="celebration-float float-elem-4">💖</div>
+      <div class="celebration-float float-elem-5">🎆</div>
+
+      <div id="finalContent">
+        <!-- Image Gallery Section -->
+        <div class="image-gallery">
+          <div class="gallery-item">
+            <img
+              class="gallery-img img1"
+              src="source/gallery1.jpg"
+              alt="Memory 1"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              class="gallery-img img2"
+              src="source/gallery2.jpg"
+              alt="Memory 2"
+            />
+            <div class="img-placeholder">.</div>
+          </div>
+          <div class="gallery-item">
+            <img
+              class="gallery-img img3"
+              src="source/gallery3.jpg"
+              alt="Memory 3"
+            />
+            <div class="img-placeholder">.</div>
+          </div>
+        </div>
+
+        <div id="name">Muktai</div>
+        <div id="finalTitle">Happy Birthday CutiePieee❤️</div>
+        <div id="finalText">
+          Today isn't just about turning a year older. It's about celebrating
+          the warmth you bring into my life, the calm in my chaos(more like
+          chaos in my calm hehe just kidding), and the smile that feels like
+          home.
+        </div>
+
+        <!-- Interactive Buttons -->
+        <div class="final-buttons">
+          <button class="btn-interactive" id="btn-message">💌 Letter</button>
+          <button class="btn-interactive" id="btn-wish">🎁 Special Wish</button>
+        </div>
+
+        <div id="holdHint">Long press here ⬇️</div>
+        <div id="secret">I love you Babudiiiiii. Always ♡</div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
