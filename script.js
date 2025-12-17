@@ -273,7 +273,7 @@ const btnWish = document.getElementById("btn-wish");
 
 if (btnMessage) {
   btnMessage.addEventListener("click", () => {
-    const messageText = "🎀 Special Message:\n\nA very very very Happy Birthday to my +1. I hope you acheive whatever you aspire, i believe in you and i'm very proud of you. Can't believe 9 saal hogye apne friendship ko, bohot se dost aaye bohot se gye but we somehow stayed in touch and i hope it'll stay that way. I know mein tujhe pareshaan karta hu kabhi kabhi but sorry i cant help it mujhe mazaa aata hai, so tujhe bear karna padega hehehehe. Always be the person, that you are (zyaada taarif nhi karunga warna sarr pe chadh jaayegi huddddd). 2026 will be ours and here's to creating more memories together! <3\n\nHappy Birthday Kiddo\n\nWith Love from Aaditya";
+    const messageText = "🎀 Special Message:\nMuktai \n\nA very very very Happy Birthday to my +1. I hope you acheive whatever you aspire, i believe in you and i'm very proud of you. Can't believe 9 saal hogye apne friendship ko, bohot se dost aaye bohot se gye but we somehow stayed in touch and i hope it'll stay that way. I know mein tujhe pareshaan karta hu kabhi kabhi but sorry i cant help it mujhe mazaa aata hai, so tujhe bear karna padega hehehehe. Always be the person, that you are (zyaada taarif nhi karunga warna sarr pe chadh jaayegi huddddd). I Love you to the moon and back. Cant wait to see you soon cutie. Here's to creating more memories together! <3\n\nHappy Birthday Kiddo\n\nWith Love from Aaditya";
     showModal(messageText);
     // Single firework burst on message
     createSVGFireworks(window.innerWidth / 2, window.innerHeight / 2, 1.5);
