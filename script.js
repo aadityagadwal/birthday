@@ -291,28 +291,23 @@ if (btnWish) {
 
 // ===== GALLERY IMAGE LOADING =====
 function loadGalleryImages() {
-  const images = [
-    { img: document.querySelector(".img1"), placeholder: document.querySelector(".gallery-item:nth-child(1) .img-placeholder") },
-    { img: document.querySelector(".img2"), placeholder: document.querySelector(".gallery-item:nth-child(2) .img-placeholder") },
-    { img: document.querySelector(".img3"), placeholder: document.querySelector(".gallery-item:nth-child(3) .img-placeholder") }
-  ];
+  const images = document.querySelectorAll(".gallery-img");
 
-  images.forEach(item => {
-    if (item.img) {
-      item.img.addEventListener("load", () => {
-        item.img.classList.add("loaded");
-        if (item.placeholder) {
-          item.placeholder.style.opacity = "0";
-        }
+  images.forEach(img => {
+    if (img.complete && img.naturalWidth !== 0) {
+      img.classList.add("loaded");
+    } else {
+      img.addEventListener("load", () => {
+        img.classList.add("loaded");
       });
-      item.img.addEventListener("error", () => {
-        if (item.placeholder) {
-          item.placeholder.style.opacity = "1";
-        }
+
+      img.addEventListener("error", () => {
+        console.error("Failed to load image:", img.src);
       });
     }
   });
 }
+
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
