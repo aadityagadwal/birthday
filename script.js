@@ -128,11 +128,16 @@ let score = 0;
 const heartContainer = document.getElementById("heartContainer");
 const scoreDisplay = document.getElementById("score");
 const popSound = document.getElementById("popSound");
+const yaySound = document.getElementById("yaySound");
 
 function playPopSound() {
   if (popSound) {
     popSound.currentTime = 0;
     popSound.play().catch(() => console.log("Pop sound could not be played"));
+  }
+  if (yaySound) {
+    yaySound.currentTime = 0;
+    yaySound.play().catch(() => console.log("Yay sound could not be played"));
   }
 }
 
@@ -181,7 +186,10 @@ function startGame() {
     gameScreen.style.display = "flex";
     spawnInterval = setInterval(spawnHeart, 800);
     const bgMusic = document.getElementById("bgMusic");
-    if (bgMusic) bgMusic.play();
+    if (bgMusic) {
+      bgMusic.muted = false;
+      bgMusic.play().catch(err => console.log("Background music error:", err));
+    }
   }, 600);
 }
 
@@ -204,9 +212,10 @@ if (tapContainer) {
 
 function finish() {
   gameScreen.style.display = "none";
-  finalScreen.style.display = "block";
-  // Automatically trigger spectacular fireworks on finish
-  startContinuousFireworks();
+  // Show speed game next
+  const speedGame = document.getElementById("speedGame");
+  speedGame.style.display = "flex";
+  startSpeedGame();
 }
 
 // ===== LONG PRESS SECRET MESSAGE =====
@@ -234,13 +243,38 @@ if (finalText) {
   finalText.addEventListener("mouseup", () => clearTimeout(timer));
 }
 
+// ===== MODAL FUNCTIONS =====
+function showModal(message) {
+  const modal = document.getElementById("messageModal");
+  const modalMessage = document.getElementById("modalMessage");
+  const closeBtn = document.querySelector(".modal-close");
+  
+  if (modalMessage) modalMessage.textContent = message;
+  if (modal) modal.classList.add("active");
+  
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      if (modal) modal.classList.remove("active");
+    };
+  }
+  
+  if (modal) {
+    modal.onclick = (e) => {
+      if (e.target === modal || e.target.classList.contains("modal-overlay")) {
+        modal.classList.remove("active");
+      }
+    };
+  }
+}
+
 // ===== INTERACTIVE BUTTONS =====
 const btnMessage = document.getElementById("btn-message");
 const btnWish = document.getElementById("btn-wish");
 
 if (btnMessage) {
   btnMessage.addEventListener("click", () => {
-    alert("🎀 Special Message:\n\nA very very very Happy Birthday to my +1. I hope you acheive whatever you aspire, i believe in you and i'm very proud of you. Can't believe 9 saal hogye apne friendship ko, bohot se dost aaye bohot se gye but we somehow stayed in touch and i hope it'll stay that way. I know mein tujhe pareshaan karta hu kabhi kabhi but sorry i cant help it mujhe mazaa aata hai, so tujhe bear karna padega hehehehe. Always be the person, that you are (zyaada taarif nhi karunga warna sarr pe chadh jaayegi huddddd). 2026 will be ours and here's to creating more memories together! <3 \n Happy Birthday Kiddo \n With Love from Aaditya ");
+    const messageText = "🎀 Special Message:\n\nA very very very Happy Birthday to my +1. I hope you acheive whatever you aspire, i believe in you and i'm very proud of you. Can't believe 9 saal hogye apne friendship ko, bohot se dost aaye bohot se gye but we somehow stayed in touch and i hope it'll stay that way. I know mein tujhe pareshaan karta hu kabhi kabhi but sorry i cant help it mujhe mazaa aata hai, so tujhe bear karna padega hehehehe. Always be the person, that you are (zyaada taarif nhi karunga warna sarr pe chadh jaayegi huddddd). 2026 will be ours and here's to creating more memories together! <3\n\nHappy Birthday Kiddo\n\nWith Love from Aaditya";
+    showModal(messageText);
     // Single firework burst on message
     createSVGFireworks(window.innerWidth / 2, window.innerHeight / 2, 1.5);
   });
@@ -248,7 +282,8 @@ if (btnMessage) {
 
 if (btnWish) {
   btnWish.addEventListener("click", () => {
-    alert("🎁 My Special Wish For You:\n\nTujhe jo make up aur kapde chahiye woh tujhe mil jaayeeeeee!!!! <3");
+    const wishText = "🎁 My Special Wish For You:\n\nTujhe jo make up aur kapde chahiye woh tujhe mil jaayeeeeee!!!! <3";
+    showModal(wishText);
     // Multiple fireworks for wish
     triggerMultipleFireworks();
   });
@@ -290,8 +325,106 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     console.log("DOMContentLoaded fired");
     loadGalleryImages();
+    initMusicVisualization();
   });
 } else {
   console.log("DOM already ready, initializing now");
   loadGalleryImages();
+  initMusicVisualization();
 }
+
+// ===== SPEED GAME =====
+let speedScore = 0;
+let speedGameRunning = false;
+
+function startSpeedGame() {
+  speedScore = 0;
+  speedGameRunning = true;
+  const speedScoreDisplay = document.getElementById("speedScore");
+  const speedButton = document.getElementById("speedButton");
+  
+  if (speedScoreDisplay) speedScoreDisplay.textContent = "0";
+  
+  speedButton.addEventListener("click", onSpeedButtonClick);
+}
+
+function onSpeedButtonClick() {
+  if (!speedGameRunning) return;
+  speedScore++;
+  const speedScoreDisplay = document.getElementById("speedScore");
+  if (speedScoreDisplay) speedScoreDisplay.textContent = speedScore;
+  playPopSound();
+  
+  // Check if reached 22 clicks
+  if (speedScore >= 22) {
+    speedGameRunning = false;
+    const speedButton = document.getElementById("speedButton");
+    speedButton.removeEventListener("click", onSpeedButtonClick);
+    setTimeout(() => finishSpeedGame(), 300);
+  }
+}
+
+function finishSpeedGame() {
+  const speedGame = document.getElementById("speedGame");
+  speedGame.style.display = "none";
+  finalScreen.style.display = "block";
+  
+  // Automatically trigger spectacular fireworks on finish
+  startContinuousFireworks();
+  // Keep fireworks going continuously
+  setInterval(() => {
+    startContinuousFireworks();
+  }, 6000);
+  
+  // Start music visualization
+  const visualization = document.getElementById("visualization");
+  if (visualization) visualization.classList.add("active");
+}
+
+// ===== MUSIC VISUALIZATION =====
+let analyser = null;
+let dataArray = null;
+
+function initMusicVisualization() {
+  const bgMusic = document.getElementById("bgMusic");
+  if (!bgMusic || !window.AudioContext) return;
+  
+  bgMusic.addEventListener("play", () => {
+    if (analyser) return; // Already initialized
+    
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      
+      const source = audioContext.createMediaElementAudioSource(bgMusic);
+      source.connect(analyser);
+      analyser.connect(audioContext.destination);
+      
+      const bufferLength = analyser.frequencyBinCount;
+      dataArray = new Uint8Array(bufferLength);
+      
+      animateVisualization();
+    } catch (e) {
+      console.log("Audio visualization not supported");
+    }
+  });
+}
+
+function animateVisualization() {
+  if (!analyser || !dataArray) return;
+  
+  analyser.getByteFrequencyData(dataArray);
+  
+  const bars = document.querySelectorAll("#visualization .bar");
+  const barCount = bars.length;
+  
+  bars.forEach((bar, index) => {
+    const average = dataArray[index * Math.floor(dataArray.length / barCount)];
+    const height = 40 + (average / 255) * 80;
+    bar.style.height = height + "px";
+  });
+  
+  requestAnimationFrame(animateVisualization);
+}
+

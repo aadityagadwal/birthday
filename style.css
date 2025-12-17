@@ -25,7 +25,9 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-family: 'Segoe UI', 'Trebuchet MS', 'Ubuntu', sans-serif;
+  font-weight: 700;
+  font-style: italic;
   background: linear-gradient(
     135deg,
     #fff5f9 0%,
@@ -427,8 +429,10 @@ canvas {
   margin-bottom: 12px;
   background: linear-gradient(
     90deg,
-    var(--rose-pastel),
-    var(--purple-pastel)
+    #FF006E,
+    #FF1493,
+    #FFB703,
+    #39FF14
   );
   -webkit-background-clip: text;
   color: transparent;
@@ -439,7 +443,7 @@ canvas {
 }
 
 #name:hover {
-  filter: drop-shadow(0 0 20px rgba(255, 99, 153, 0.6));
+  filter: drop-shadow(0 0 20px rgba(7, 132, 234, 0.6));
   animation-play-state: paused;
 }
 
@@ -447,8 +451,10 @@ canvas {
   font-size: 2.4rem;
   background: linear-gradient(
     90deg,
-    var(--pink-pastel),
-    var(--gold-pastel)
+    #FF006E,
+    #FF1493,
+    #FFB703,
+    #39FF14
   );
   -webkit-background-clip: text;
   color: transparent;
@@ -878,3 +884,289 @@ canvas {
     transform: translate(var(--tx), var(--ty)) scale(0);
   }
 }
+
+/* =========================================================
+   SPEED GAME STYLING
+   ========================================================= */
+#speedGame {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #fff5f9, #f0e4ff);
+  z-index: 10;
+  gap: 30px;
+}
+
+#speedCounter {
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  font-weight: bold;
+  font-style: italic;
+}
+
+#speedButton {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(90deg, #ff99cc, #d9a8ff);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 179, 217, 0.4);
+  transition: all 0.1s ease;
+  animation: buttonPulse 0.6s infinite;
+}
+
+#speedButton:active {
+  transform: scale(0.95);
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* =========================================================
+   MUSIC VISUALIZATION
+   ========================================================= */
+#visualization {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  gap: 8px;
+  z-index: 20;
+}
+
+#visualization.active {
+  display: flex;
+}
+
+.bar {
+  width: 8px;
+  height: 40px;
+  background: linear-gradient(90deg, #ff99cc, #d9a8ff);
+  border-radius: 4px;
+  animation: barMove 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 153, 204, 0.6);
+}
+
+@keyframes barMove {
+  0% {
+    height: 40px;
+  }
+  50% {
+    height: 80px;
+  }
+  100% {
+    height: 40px;
+  }
+}
+
+/* =========================================================
+   BIRTHDAY CAKE ANIMATION
+   ========================================================= */
+.birthday-cake-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  animation: slideUp 0.8s ease-out;
+}
+
+.cake {
+  position: relative;
+  width: 160px;
+  height: 140px;
+}
+
+.cake-layer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ffb3d9, #ff99cc);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(255, 179, 217, 0.3);
+}
+
+.cake-layer-1 {
+  bottom: 0;
+  width: 160px;
+  height: 45px;
+}
+
+.cake-layer-2 {
+  bottom: 40px;
+  width: 130px;
+  height: 45px;
+  background: linear-gradient(135deg, #ff99cc, #ff85c1);
+}
+
+.cake-layer-3 {
+  bottom: 80px;
+  width: 100px;
+  height: 45px;
+  background: linear-gradient(135deg, #ff85c1, #ff70b5);
+}
+
+.candles {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.candle {
+  position: relative;
+  width: 6px;
+  height: 25px;
+  background: #fff9e6;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(255, 255, 200, 0.5);
+}
+
+.flame {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 12px;
+  background: linear-gradient(to top, #FFD700, #FFA500, #FF6B00);
+  border-radius: 50% 50% 50% 0;
+  animation: flameFlicker 0.4s infinite;
+  box-shadow: 0 0 10px #FFD700, 0 0 5px #FF6B00;
+}
+
+.candle-1 .flame {
+  animation-delay: 0s;
+}
+
+.candle-2 .flame {
+  animation-delay: 0.1s;
+}
+
+.candle-3 .flame {
+  animation-delay: 0.2s;
+}
+
+.candle-4 .flame {
+  animation-delay: 0.3s;
+}
+
+.candle-5 .flame {
+  animation-delay: 0.4s;
+}
+
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: translateX(-50%) scaleY(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(-55%) scaleY(1.1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateX(-45%) scaleY(0.95);
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(-52%) scaleY(1.05);
+    opacity: 0.95;
+  }
+}
+
+/* =========================================================
+   MODAL POPUP STYLING
+   ========================================================= */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  position: relative;
+  background: linear-gradient(135deg, #fff5f9, #fffbfd);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(255, 179, 217, 0.4);
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid rgba(255, 179, 217, 0.3);
+}
+
+#modalMessage {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+  font-weight: bold;
+  font-style: italic;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(90deg, #ff99cc, #d9a8ff);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  box-shadow: 0 5px 15px rgba(255, 179, 217, 0.3);
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+

@@ -8,15 +8,15 @@
   </head>
   <body>
     <!-- AUDIO PLAYER -->
-    <audio id="bgMusic" loop>
-      <source src="/source/birthday.mp3" type="audio/mpeg" />
+    <audio id="bgMusic" loop muted>
+      <source src="source/birthday.mp3" type="audio/mpeg" />
     </audio>
 
     <!-- POP SOUND EFFECT -->
-    <audio id="popSound">
+    <audio id="popSound" preload="auto">
       <source src="source/pop.mp3" type="audio/mpeg" />
     </audio>
-    <audio id="yaySound">
+    <audio id="yaySound" preload="auto">
       <source src="source/yay.mp3" type="audio/mpeg" />
     </audio>
 
@@ -75,6 +75,21 @@
       <div id="heartContainer"></div>
     </div>
 
+    <!-- SPEED GAME -->
+    <div id="speedGame">
+      <div id="speedCounter">Clicks <span id="speedScore">0</span> / 22</div>
+      <button id="speedButton">Click Me!</button>
+    </div>
+
+    <!-- MUSIC VISUALIZATION -->
+    <div id="visualization">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
     <!-- FINAL -->
     <div id="final">
       <!-- Ambient light effects -->
@@ -90,6 +105,32 @@
       <div class="celebration-float float-elem-5">🎆</div>
 
       <div id="finalContent">
+        <!-- Birthday Cake Animation -->
+        <div class="birthday-cake-container">
+          <div class="cake">
+            <div class="cake-layer cake-layer-1"></div>
+            <div class="cake-layer cake-layer-2"></div>
+            <div class="cake-layer cake-layer-3"></div>
+            <div class="candles">
+              <div class="candle candle-1">
+                <div class="flame"></div>
+              </div>
+              <div class="candle candle-2">
+                <div class="flame"></div>
+              </div>
+              <div class="candle candle-3">
+                <div class="flame"></div>
+              </div>
+              <div class="candle candle-4">
+                <div class="flame"></div>
+              </div>
+              <div class="candle candle-5">
+                <div class="flame"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Image Gallery Section -->
         <div class="image-gallery">
           <div class="gallery-item">
@@ -132,8 +173,16 @@
           <button class="btn-interactive" id="btn-wish">🎁 Special Wish</button>
         </div>
 
-        <div id="holdHint">Long press here ⬇️</div>
         <div id="secret">I love you Babudiiiiii. Always ♡</div>
+      </div>
+    </div>
+
+    <!-- MODAL POPUP -->
+    <div id="messageModal" class="modal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div id="modalMessage"></div>
       </div>
     </div>
 
